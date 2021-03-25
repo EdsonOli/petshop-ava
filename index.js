@@ -56,6 +56,9 @@ const vacinarPet = (pet) => {
         exibirPet(pet)
         return 1
     }
+    else{
+        return 0
+    }
 }
 
 const campanhaVacinacao = (pet) => {
@@ -66,10 +69,25 @@ const campanhaVacinacao = (pet) => {
     console.log(vacinados)
 }
 
+const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
+    let pet =  {
+        nome: nome,
+        tipo: tipo,
+        idade: idade,
+        raca: raca,
+        peso: peso,
+        tutor: tutor,
+        vacinado: vacinado,
+        servicos: []
+    }
+    pets.push(pet)
+}
+
 
 
 
 //listarPets();
-//vacinarPet(pets[2])
-campanhaVacinacao()
 
+adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
+adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
+campanhaVacinacao()
