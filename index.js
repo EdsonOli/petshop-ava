@@ -39,7 +39,10 @@ let pets =[
 const listarPets = () => {
    
     for(let pet of pets){
-        console.log(`Nome do Cachorro: ${pet.nome}`)
+        console.log(`Nome do Cachorro: ${pet.nome}
+        Idade: ${pet.idade}
+        Tipo: ${pet.tipo}
+        Raca: ${pet.raca}`)
     }
 }
 
