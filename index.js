@@ -1,11 +1,10 @@
 
 const moment = require('moment')
-const dadospet = require('./database.json')
 const fs = require('fs');
-
+let dataBase = fs.readFileSync('./database.json')
 
 let nomePetshop = "PETSHOP AVANADE";
-let pets = dadospet.pets
+dataBase = JSON.parse(dataBase)
 
 const exibirPet = (pet) => {
     console.log(`Nome: ${pet.nome}
@@ -15,9 +14,15 @@ const exibirPet = (pet) => {
     Vacinado: ${pet.vacinado ? "Vacinado": "Não vacinado"}
     Servicos: ${pet.servicos}`)
 }
+
+const atualizarBanco = () => {
+    let petsAtualizado = JSON.stringify(dataBase)
+    fs.writeFileSync('database.json', petsAtualizado, 'utf-8')
+}
+
 const listarPets = () => {
 
-    for (let pet of pets) {
+    for (let pet of dataBase.pets) {
         exibirPet(pet)
     }
 }
@@ -36,7 +41,7 @@ const vacinarPet = (pet) => {
 
 const campanhaVacinacao = (pet) => {
     let vacinados = 0
-    for (pet of pets) {
+    for (pet of dataBase.pets) {
         vacinados += vacinarPet(pet)
     }
     console.log(vacinados)
@@ -81,7 +86,8 @@ const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
         vacinado: vacinado,
         servicos: []
     }
-    pets.push(pet)
+    dataBase.pets.push(pet)
+    atualizarBanco()
 }
 
 
@@ -89,8 +95,8 @@ const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
 
 //listarPets();
 
-// adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
-// adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
+adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
+adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
 //campanhaVacinacao()
 // darBanhoPet(pets[3])
 // tosarPet(pets[3])
@@ -101,4 +107,4 @@ const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
 
 // console.log(naoVacinados)
 //console.log(JSON.stringify(pets))
-console.log(pets)
+console.log(dataBase.pets)
