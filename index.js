@@ -50,32 +50,35 @@ const campanhaVacinacao = (pet) => {
 const darBanhoPet = (pet) => {
     let dataHoje = moment().format('DD-MM-YYYY')
     pet.servicos.push({
-        'Serviço': "Banho ",
-        Data: dataHoje
+        'nome': "Banho ",
+        'data': dataHoje
     })
-
+    console.log(`Serviço: Banho
+     Data: ${dataHoje}`)
 }
 
 const tosarPet = (pet) => {
     let dataHoje = moment().format('DD-MM-YYYY')
     pet.servicos.push({
-        'Serviço': "Tosa ",
-        Data: dataHoje
+        'nome': "Tosa ",
+        'data': dataHoje
     })
-
+    console.log(`Serviço: Tosa
+    Data: ${dataHoje}`)
 }
 
 const apararUnhasPet = (pet) => {
     let dataHoje = moment().format('DD-MM-YYYY')
     pet.servicos.push({
-        'Serviço': "Aparou unhas ",
-        Data: dataHoje
+        'nome': "Aparou unhas ",
+        'data': dataHoje
     })
-
+    console.log(`Serviço: Aparou Unhas
+    Data: ${dataHoje}`)
 }
 
 
-const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
+const adicionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
     let pet = {
         nome: nome,
         tipo: tipo,
@@ -90,13 +93,18 @@ const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
     atualizarBanco()
 }
 
-
+const atenderCliente = (pet, servico) => {
+    console.log(`Bem vinde ${pet.nome}!`)
+    servico(pet)
+    atualizarBanco()
+    console.log(`Tchau!`)
+}
 
 
 //listarPets();
 
-adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
-adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
+// adicionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
+// adicionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
 //campanhaVacinacao()
 // darBanhoPet(pets[3])
 // tosarPet(pets[3])
@@ -107,4 +115,5 @@ adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
 
 // console.log(naoVacinados)
 //console.log(JSON.stringify(pets))
-console.log(dataBase.pets)
+// console.log(dataBase.pets)
+atenderCliente(dataBase.pets[0], darBanhoPet)
