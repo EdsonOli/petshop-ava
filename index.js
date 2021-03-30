@@ -33,15 +33,16 @@ const buscarPorTipo = (tipo) => {
 
 
 const campanhaVacinacao = (lista) => {
-   let vacinadosAgora = []
+
    let contador = 0
-   vacinadosAgora = lista.map((pet) => {
+   lista = lista.map((pet) => {
        if (!pet.vacinado){
            pet.vacinado = true
            contador++
        }
+       return pet
    })
-   console.log(contador)
+   console.log(`Pets vacinados: ${contador}`)
    atualizarBanco()    
 }
 
@@ -103,7 +104,7 @@ const buscarPet = (nome) => {
 }
 
 
-listarPets();
+//listarPets();
 
 //adicionarNovoPet("Joelma", "gato", 4, "siames", 2, "Tercio", false)
 // adicionarNovoPet("Barbara", "cachorro", 1, "poodle", 5, "Jurema", false)
