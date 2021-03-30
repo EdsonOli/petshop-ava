@@ -21,30 +21,28 @@ const atualizarBanco = () => {
 }
 
 const listarPets = () => {
-
-    for (let pet of dataBase.pets) {
-        exibirPet(pet)
-    }
+    dataBase.pets.forEach(pet => exibirPet(pet))
 }
 
-const vacinarPet = (pet) => {
-
-    if (pet.vacinado == false) {
-        pet.vacinado = true
-        exibirPet(pet)
-        return 1
-    }
-    else {
-        return 0
-    }
+const buscarPorTipo = (tipo) => {
+    let encontrados = []
+    encontrados = dataBase.pets.filter(pet => pet.tipo === tipo)
+    return encontrados
 }
 
-const campanhaVacinacao = (pet) => {
-    let vacinados = 0
-    for (pet of dataBase.pets) {
-        vacinados += vacinarPet(pet)
-    }
-    console.log(vacinados)
+
+
+const campanhaVacinacao = (lista) => {
+   let vacinadosAgora = []
+   let contador = 0
+   vacinadosAgora = lista.map((pet) => {
+       if (!pet.vacinado){
+           pet.vacinado = true
+           contador++
+       }
+   })
+   console.log(contador)
+   atualizarBanco()    
 }
 
 const darBanhoPet = (pet) => {
@@ -94,18 +92,23 @@ const adicionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
 }
 
 const atenderCliente = (pet, servico) => {
-    console.log(`Bem vinde ${pet.nome}!`)
+    console.log(`Bem vinde ao ${nomePetshop}, ${pet.nome}!`)
     servico(pet)
     atualizarBanco()
     console.log(`Tchau!`)
 }
 
+const buscarPet = (nome) => {
+    return dataBase.pets.find( pet => pet.nome === nome)
+}
 
-//listarPets();
 
-// adicionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
-// adicionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
-//campanhaVacinacao()
+listarPets();
+
+//adicionarNovoPet("Joelma", "gato", 4, "siames", 2, "Tercio", false)
+// adicionarNovoPet("Barbara", "cachorro", 1, "poodle", 5, "Jurema", false)
+//campanhaVacinacao(dataBase.pets)
+// console.log(dataBase.pets.length)
 // darBanhoPet(pets[3])
 // tosarPet(pets[3])
 // apararUnhasPet(pets[3])
@@ -116,4 +119,5 @@ const atenderCliente = (pet, servico) => {
 // console.log(naoVacinados)
 //console.log(JSON.stringify(pets))
 // console.log(dataBase.pets)
-atenderCliente(dataBase.pets[0], darBanhoPet)
+//atenderCliente(dataBase.pets[0], darBanhoPet)
+//console.log(buscarPorTipo("gato"))
